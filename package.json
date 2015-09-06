@@ -13,7 +13,7 @@
     "test": "mocha --compilers js:babel/register --recursive",
     "watch": "parallelshell 'npm run watch:build' 'npm run watch:test'",
     "watch:build": "npm run build -- --watch",
-    "watch:test": "chokidar {src,test}/**/*.js -c 'npm test' --initial"
+    "watch:test": "watch 'npm test' src test"
   },
   "keywords": [
     "rest",
@@ -28,8 +28,8 @@
   "license": "MIT",
   "devDependencies": {
     "babel": "^5.8.23",
-    "chokidar-cli": "^1.0.1",
     "mocha": "^2.3.0",
-    "parallelshell": "^2.0.0"
+    "parallelshell": "^2.0.0",
+    "watch": "^0.16.0"
   }
 }
