@@ -1,0 +1,6 @@
+{
+  "title": "hotcakes",
+  "source": "src",
+  "destination": "docs",
+  "access": ["public", "private", "protected"]
+}

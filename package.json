@@ -8,7 +8,12 @@
     "url": "git@github.com:dylanfoster/hotcakes.git"
   },
   "scripts": {
-    "test": "mocha --compilers js:babel/register --recurisve"
+    "build": "babel -Dd lib src",
+    "clean": "rm -rf coverage docs lib",
+    "test": "mocha --compilers js:babel/register --recursive",
+    "watch": "parallelshell 'npm run watch:build' 'npm run watch:test'",
+    "watch:build": "npm run build -- --watch",
+    "watch:test": "chokidar {src,test}/**/*.js -c 'npm test' --initial"
   },
   "keywords": [
     "rest",
@@ -20,5 +25,11 @@
     "name": "Dylan Foster",
     "email": "dylan947@gmail.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "chokidar-cli": "^1.0.1",
+    "mocha": "^2.3.0",
+    "parallelshell": "^2.0.0"
+  }
 }
