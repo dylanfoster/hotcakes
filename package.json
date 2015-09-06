@@ -12,8 +12,8 @@
     "clean": "rm -rf coverage docs lib",
     "test": "mocha --compilers js:babel/register --recursive",
     "watch": "parallelshell 'npm run watch:build' 'npm run watch:test'",
-    "watch:build": "npm run build -- --watch",
-    "watch:test": "watch 'npm test' src test"
+    "watch:build": "chokidar 'src/**/*.js' -c 'npm run build' --polling",
+    "watch:test": "chokidar '{lib,test}/**/*.js' -c 'npm test' --initial --polling"
   },
   "keywords": [
     "rest",
@@ -28,8 +28,15 @@
   "license": "MIT",
   "devDependencies": {
     "babel": "^5.8.23",
+    "chai": "^3.2.0",
+    "chokidar-cli": "^1.0.1",
     "mocha": "^2.3.0",
     "parallelshell": "^2.0.0",
+    "supertest": "^1.1.0",
     "watch": "^0.16.0"
+  },
+  "dependencies": {
+    "inflection": "^1.7.1",
+    "restify": "^4.0.0"
   }
 }
