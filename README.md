@@ -1,7 +1,5 @@
 # hotcakes
 
-> hotcakes pic
-
 ![](/hotcakes.png)
 
 hotcakes is a RESTful framework built with configuration in mind. It uses
