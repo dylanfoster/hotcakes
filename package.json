@@ -1,0 +1,24 @@
+{
+  "name": "hotcakes",
+  "version": "1.0.0",
+  "description": "RESTful api framework built on restify",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:dylanfoster/hotcakes.git"
+  },
+  "scripts": {
+    "test": "mocha --compilers js:babel/register --recurisve"
+  },
+  "keywords": [
+    "rest",
+    "api",
+    "restify",
+    "framework"
+  ],
+  "author": {
+    "name": "Dylan Foster",
+    "email": "dylan947@gmail.com"
+  },
+  "license": "MIT"
+}
