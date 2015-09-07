@@ -88,7 +88,7 @@ Router.map(function () {
 
   // define a path otherwise the path will be implied
 
-  this.resource("user", { path: "users/:id" });
+  this.resource("users", { path: "/people" });
 
   // implied as path: "users/:user_id"
 });
