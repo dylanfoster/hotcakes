@@ -109,8 +109,7 @@ DELETE /users/:id -> UserController.delete
 
 ## Contributing
 
-> TODO: add content
-
+Pull Requests and issues welcome! See [contributing](/contributing.md)
 ## License
 
 The MIT License (MIT)
