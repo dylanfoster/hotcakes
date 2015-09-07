@@ -20,11 +20,41 @@ describe("Router", function () {
   });
 
   describe("resource", function () {
-    it("binds a resource to a set of paths and actions", function (done) {
+    beforeEach(function () {
       router.resource("users");
+    });
 
+    it("binds a resource to a GET request", function (done) {
       client.get("/users")
         .expect(200, [{ id: 1 }])
+        .end(done);
+    });
+
+    it("binds a resource to a GET request when asking for id", function (done) {
+      client.get("/users/1")
+        .expect(200, { id: 1, name: "john smith" })
+        .end(done);
+    });
+
+    it("binds a resource to a PUT request", function (done) {
+      client.put("/users/1")
+        .send({ name: "john smith" })
+        .expect(200, { id: 1, name: "john smith" })
+        .expect("Content-Type", /json/)
+        .end(done);
+    });
+
+    it("binds a resource to a POST request", function (done) {
+      client.post("/users")
+        .send({ name: "john smith" })
+        .expect(201, { id: 2, name: "john smith" })
+        .expect("Content-Type", /json/)
+        .end(done);
+    });
+
+    it("binds a resource to a DELETE request", function (done) {
+      client.del("/users/1")
+        .expect(204)
         .end(done);
     });
   });
