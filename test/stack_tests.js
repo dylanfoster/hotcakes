@@ -4,7 +4,7 @@ import path from "path";
 
 import supertest from "supertest";
 
-import Hotcakes from "../lib/stack";
+import Hotcakes from "../src/stack";
 
 describe("Hotcakes", function () {
   let client, hotcake;

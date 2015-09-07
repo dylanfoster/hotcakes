@@ -6,7 +6,7 @@ import { expect } from "chai";
 import restify from "restify";
 import supertest from "supertest";
 
-import Router from "../lib/router";
+import Router from "../src/router";
 
 describe("Router", function () {
   let client, router;
