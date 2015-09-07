@@ -35,7 +35,10 @@ app.js
 ```javascript
 import Stack from "hotcakes";
 
+// pass in restify options OR your own restify app instance
+
 let hotcake = new Stack({
+  app: restify.createServer(),
   restify: {
     .. restify options ..
   }
