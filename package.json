@@ -11,6 +11,7 @@
     "build": "babel -D -d lib src",
     "clean": "rm -rf coverage docs lib",
     "lint": "eslint src test",
+    "prepublish": "npm run build",
     "pretest": "npm run lint",
     "test": "mocha --compilers js:babel/register --recursive",
     "watch": "parallelshell 'npm run watch:build' 'npm run watch:test'",

@@ -8,8 +8,8 @@ import supertest from "supertest";
 
 import Router from "../src/router";
 
-describe("Router", function () {
-  let client, router;
+describe.only("Router", function () {
+  let app, client, router;
 
   it("requires 'controllersPath'", function () {
     expect(function () {
@@ -17,9 +17,22 @@ describe("Router", function () {
     }).to.throw("Missing required 'controllersPath' property");
   });
 
+  it("requires a restify app", function () {
+    expect(function () {
+      new Router({
+        controllersPath: "foo"
+      });
+    }).to.throw("Missing required app instance");
+  });
+
   beforeEach(function () {
+    app = restify.createServer();
+    app.use(restify.bodyParser(),
+            restify.fullResponse(),
+            restify.queryParser()
+        );
     router = new Router({
-      app: restify.createServer(),
+      app: app,
       controllersPath: path.resolve(__dirname, "fixtures/controllers")
     });
     client = supertest(router.app);
@@ -84,6 +97,7 @@ describe("Router", function () {
   describe("map", function () {
     it("maps resources to router", function (done) {
       let router = Router.map({
+        app: app,
         controllersPath: path.resolve(__dirname, "fixtures/controllers")
       }, function () {
         this.resource("users");

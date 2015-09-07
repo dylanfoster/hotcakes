@@ -5,19 +5,13 @@ import fs from "fs";
 import path from "path";
 
 import inflect from "inflection";
-import restify from "restify";
 
 class Router {
   constructor(options = {}) {
     Assert(options.controllersPath, "Missing required 'controllersPath' property");
+    Assert(options.app, "Missing required app instance");
     this.controllersPath = options.controllersPath;
-    this._routes = new Map();
-    this.app = options.app || restify.createServer();
-    this.app.use(
-        restify.fullResponse(),
-        restify.queryParser(),
-        restify.bodyParser()
-    );
+    this.app = options.app;
   }
 
   resource(name, options = {}) {
