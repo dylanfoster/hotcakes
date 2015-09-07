@@ -8,11 +8,11 @@
     "url": "git@github.com:dylanfoster/hotcakes.git"
   },
   "scripts": {
-    "build": "babel -Dd lib src",
+    "build": "babel -D -d lib src",
     "clean": "rm -rf coverage docs lib",
     "test": "mocha --compilers js:babel/register --recursive",
     "watch": "parallelshell 'npm run watch:build' 'npm run watch:test'",
-    "watch:build": "chokidar 'src/**/*.js' -c 'npm run build' --polling",
+    "watch:build": "chokidar 'src/**/*.js' -c 'npm run build' --polling --initial",
     "watch:test": "chokidar '{lib,test}/**/*.js' -c 'npm test' --initial --polling"
   },
   "keywords": [

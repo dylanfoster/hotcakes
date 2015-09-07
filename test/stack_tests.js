@@ -16,13 +16,13 @@ describe("Hotcakes", function () {
     });
   });
 
-  describe("routing", function () {
+  describe("boot", function () {
     it("bootraps and routes specified requests", function (done) {
-      let router = hotcake.Router.map(function () {
+      hotcake.Router.map(function () {
         this.resource("users");
       });
 
-      client = supertest(router.app);
+      client = supertest(hotcake.boot());
       client.get("/users")
         .expect(200, [{ id: 1 }])
         .end(done);
