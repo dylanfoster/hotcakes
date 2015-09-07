@@ -45,6 +45,12 @@ class Router {
     handlers.push(action);
     this.app[method](route, handlers);
   }
+
+  static map(options, callback){
+    let router = new Router(options);
+    callback.call(router);
+    return router;
+  }
 }
 
 export default Router;

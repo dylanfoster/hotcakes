@@ -58,4 +58,20 @@ describe("Router", function () {
         .end(done);
     });
   });
+
+  describe("map", function () {
+    it("maps resources to router", function (done) {
+      let router = Router.map({
+        controllersPath: path.resolve(__dirname, "fixtures/controllers")
+      }, function () {
+        this.resource("users");
+      });
+
+      client = supertest(router.app);
+
+      client.get("/users")
+        .expect(200, [{ id: 1 }])
+        .end(done);
+    });
+  });
 });
