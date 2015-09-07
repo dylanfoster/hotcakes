@@ -1,5 +1,6 @@
 "use strict";
 
+import { ok as Assert } from "assert";
 import fs from "fs";
 import path from "path";
 
@@ -8,9 +9,10 @@ import restify from "restify";
 
 class Router {
   constructor(options = {}) {
+    Assert(options.controllersPath, "Missing required 'controllersPath' property");
+    this.controllersPath = options.controllersPath;
     this._routes = new Map();
     this.app = options.app || restify.createServer();
-    this.controllersPath = options.controllersPath || path.resolve("controllers");
     this.app.use(
         restify.fullResponse(),
         restify.queryParser(),

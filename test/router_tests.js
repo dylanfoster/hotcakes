@@ -11,6 +11,12 @@ import Router from "../lib/router";
 describe("Router", function () {
   let client, router;
 
+  it("requires 'controllersPath'", function () {
+    expect(function () {
+      new Router();
+    }).to.throw("Missing required 'controllersPath' property");
+  });
+
   beforeEach(function () {
     router = new Router({
       app: restify.createServer(),

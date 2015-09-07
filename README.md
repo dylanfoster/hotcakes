@@ -81,6 +81,7 @@ app.js
 import Stack from "hotcakes";
 
 let hotcake = new Stack({ ...config... });
+let Router = hotcake.Router;
 
 hotcake.router.map(function () {
   this.resource("users");
