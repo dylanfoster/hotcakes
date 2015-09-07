@@ -7,9 +7,9 @@ import restify from "restify";
 import Router from "./router";
 
 const DEFAULT_PLUGINS = [
-  "bodyParser",
-  "fullResponse",
-  "queryParser"
+  restify.bodyParser(),
+  restify.fullResponse(),
+  restify.queryParser()
 ];
 
 class Stack {
@@ -25,12 +25,15 @@ class Stack {
       callback.call(router);
       return router;
     }
+    this.options = options;
     this.Router = Router;
   }
 
   boot(options = {}) {
-    this.app.use(DEFAULT_PLUGINS);
-    return this.app;
+    DEFAULT_PLUGINS.forEach(plugin => {
+      this.app.use(plugin);
+    });
+    return this.app.listen(this.options.port || 3800);
   }
 }
 
