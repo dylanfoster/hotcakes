@@ -109,7 +109,7 @@ DELETE /users/:id -> UserController.delete
 
 ## Contributing
 
-Pull Requests and issues welcome! See [contributing](/contributing.md)
+Pull Requests and issues welcome! See [contributing](/CONTRIBUTING.md)
 ## License
 
 The MIT License (MIT)
