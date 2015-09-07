@@ -83,7 +83,7 @@ import Stack from "hotcakes";
 let hotcake = new Stack({ ...config... });
 let Router = hotcake.Router;
 
-hotcake.router.map(function () {
+Router.map(function () {
   this.resource("users");
 
   // define a path otherwise the path will be implied
