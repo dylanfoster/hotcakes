@@ -1,5 +1,9 @@
 # hotcakes
 
+[![NPM](https://nodei.co/npm/hotcakes.png)](https://nodei.co/npm/hotcakes/)
+
+[![Build Status](https://travis-ci.org/dylanfoster/hotcakes.svg?branch=master)](https://travis-ci.org/dylanfoster/hotcakes) [![npm version](https://badge.fury.io/js/hotcakes.svg)](http://badge.fury.io/js/hotcakes)
+
 ![](/hotcakes.png)
 
 hotcakes is a RESTful framework built with configuration in mind. It uses
