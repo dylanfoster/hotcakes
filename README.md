@@ -35,7 +35,11 @@ app.js
 ```javascript
 import Stack from "hotcakes";
 
-let hotcake = new Stack({ ...config... });
+let hotcake = new Stack({
+  restify: {
+    .. restify options ..
+  }
+});
 
 export default hotcake;
 ```
@@ -84,7 +88,7 @@ app.js
 ```javascript
 import Stack from "hotcakes";
 
-let hotcake = new Stack({ ...config... });
+let hotcake = new Stack();
 let Router = hotcake.Router;
 
 Router.map(function () {
@@ -114,6 +118,7 @@ DELETE /users/:id -> UserController.delete
 ## Contributing
 
 Pull Requests and issues welcome! See [contributing](/CONTRIBUTING.md)
+
 ## License
 
 The MIT License (MIT)
