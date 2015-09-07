@@ -24,7 +24,7 @@ class Stack {
       });
       callback.call(router);
       return router;
-    }
+    };
     this.options = options;
     this.Router = Router;
   }

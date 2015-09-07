@@ -26,4 +26,4 @@ export default {
       name: "john smith"
     }).end();
   }
-}
+};

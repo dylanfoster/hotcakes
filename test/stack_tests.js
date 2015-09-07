@@ -2,7 +2,6 @@
 
 import path from "path";
 
-import { expect } from "chai";
 import supertest from "supertest";
 
 import Hotcakes from "../lib/stack";
