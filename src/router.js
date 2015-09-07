@@ -20,7 +20,7 @@ class Router {
     );
   }
 
-  resource(name) {
+  resource(name, options = {}) {
     let controllers = {};
 
     fs.readdirSync(this.controllersPath)
@@ -31,15 +31,18 @@ class Router {
 
     let controllerName = `${inflect.capitalize(inflect.singularize(name))}Controller`;
     let controller = controllers[controllerName];
-    this._bindRoutes(name, controller);
+    this._bindRoutes(name, controller, options);
   }
 
-  _bindRoutes(resourceName, actions) {
-    this._bindRoute(resourceName, "get", actions.get);
-    this._bindRoute(`${resourceName}/:id`, "get", actions.findById);
-    this._bindRoute(`${resourceName}/:id`, "put", actions.put);
-    this._bindRoute(resourceName, "post", actions.post);
-    this._bindRoute(`${resourceName}/:id`, "del", actions.delete);
+  _bindRoutes(resourceName, actions, options) {
+    let paramKey = options.paramKey || "id";
+    let routePath = options.path || resourceName;
+
+    this._bindRoute(routePath, "get", actions.get);
+    this._bindRoute(`${routePath}/:${paramKey}`, "get", actions.findById);
+    this._bindRoute(`${routePath}/:${paramKey}`, "put", actions.put);
+    this._bindRoute(routePath, "post", actions.post);
+    this._bindRoute(`${routePath}/:${paramKey}`, "del", actions.delete);
   }
 
   _bindRoute(route, method, action) {

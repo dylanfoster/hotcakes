@@ -63,6 +63,22 @@ describe("Router", function () {
         .expect(204)
         .end(done);
     });
+
+    it("allows for path overriding", function (done) {
+      router.resource("foo", { path: "/bar" });
+
+      client.get("/bar")
+        .expect(200)
+        .end(done);
+    });
+
+    it("allows for paramKey overriding", function (done) {
+      router.resource("foo", { paramKey: "bar_id" });
+
+      client.get("/foo/1")
+        .expect(200, { id: 1 })
+        .end(done);
+    });
   });
 
   describe("map", function () {
