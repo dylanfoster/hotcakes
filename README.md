@@ -71,7 +71,13 @@ UserController.js
 ```javascript
 export default {
   get: function (req, res, next) {
-    db.findById(req.params.id).then(function (user) {
+    db.findAll().then(function (user) {
+      res.send(200, user);
+    });
+  },
+  findById: function (req, res, next) {
+    // the default paramKey is "<modelname>_id"
+    db.findById(req.params.user_id).then(function (user) {
       res.send(200, user);
     });
   },
@@ -101,7 +107,10 @@ Router.map(function () {
 
   this.resource("users", { path: "/people" });
 
-  // implied as path: "users/:user_id"
+
+  // define a paramKey or use the default "<modelname>_id"
+
+  this.resource("users", { paramKey: "person_id" });
 });
 
 export default hotcake;
