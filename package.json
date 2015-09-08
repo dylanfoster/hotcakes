@@ -3,10 +3,7 @@
   "version": "0.1.1",
   "description": "RESTful api framework built on restify",
   "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:dylanfoster/hotcakes.git"
-  },
+  "repository": "dylanfoster/hotcakes",
   "scripts": {
     "build": "babel -D -d lib src",
     "clean": "rm -rf coverage docs lib",
@@ -19,10 +16,11 @@
     "watch:test": "chokidar '{lib,test}/**/*.js' -c 'npm test' --initial --polling"
   },
   "keywords": [
-    "rest",
     "api",
+    "framework",
+    "rest",
     "restify",
-    "framework"
+    "router"
   ],
   "author": {
     "name": "Dylan Foster",
