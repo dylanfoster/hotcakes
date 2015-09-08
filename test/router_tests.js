@@ -8,7 +8,7 @@ import supertest from "supertest";
 
 import Router from "../src/router";
 
-describe.only("Router", function () {
+describe("Router", function () {
   let app, client, router;
 
   it("requires 'controllersPath'", function () {
