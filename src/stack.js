@@ -13,6 +13,15 @@ const DEFAULT_PLUGINS = [
 ];
 
 class Stack {
+  /**
+   * @constructor
+   *
+   * @param {Object} options Hotcakes config options
+   * @param {Object} options.app Restify app instance
+   * @param {String} options.controllersPath path to controllers directory
+   * @param {Number|String} options.port port for restify app to listen on
+   * @param {Object} options.restify optios to pass to built in restify app
+   */
   constructor(options = {}) {
     this.app = options.app || restify.createServer(options.restify);
     this.controllersPath = options.controllersPath || path.resolve("controllers");
@@ -29,7 +38,10 @@ class Stack {
     this.Router = Router;
   }
 
-  boot(options = {}) {
+  /**
+   * boot initializes app and begins listening
+   */
+  boot() {
     DEFAULT_PLUGINS.forEach(plugin => {
       this.app.use(plugin);
     });

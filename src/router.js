@@ -7,6 +7,14 @@ import path from "path";
 import inflect from "inflection";
 
 class Router {
+  /**
+   * @constructor
+   *
+   * @param {Object} options Router config options
+   * @param {Object} options.app Restify app instance
+   * @param {String} options.controllersPath path to controllers directory
+   * @param {Object} options.restify optios to pass to built in restify app
+   */
   constructor(options = {}) {
     Assert(options.controllersPath, "Missing required 'controllersPath' property");
     Assert(options.app, "Missing required app instance");
@@ -14,6 +22,14 @@ class Router {
     this.app = options.app;
   }
 
+  /**
+   * resource defines a resource and maps a set of routes to controllers
+   *
+   * @param {String} name name of the resource
+   * @param {Object} options resource config options
+   * @param {String} options.path override default route name (<name(s)>
+   * @param {String} options.paramKey override default paramKey (id)
+   */
   resource(name, options = {}) {
     let controllers = {};
 
@@ -28,6 +44,15 @@ class Router {
     this._bindRoutes(name, controller, options);
   }
 
+  /**
+   * _bindRoutes binds a resource to a set of routes
+   *
+   * @param {String} resourceName name of the resource
+   * @param {Object} actions controller for resource
+   * @param {Object} options resource options
+   * @param {String} options.path override default route name (<name(s)>
+   * @param {String} options.paramKey override default paramKey (id)
+   */
   _bindRoutes(resourceName, actions, options) {
     let paramKey = options.paramKey || "id";
     let routePath = options.path || resourceName;
@@ -39,12 +64,29 @@ class Router {
     this._bindRoute(`${routePath}/:${paramKey}`, "del", actions.delete);
   }
 
+  /**
+   * _bindRoute binds a route to a controller action
+   *
+   * @param {String} route the route (/users)
+   * @param {String} method HTTP method
+   * @param {Function(req, res, next)} action controller action
+   */
   _bindRoute(route, method, action) {
     let handlers = [];
     handlers.push(action);
     this.app[method](route, handlers);
   }
 
+  /**
+   * map binds a set of resources to routes/controllers and returns
+   * router instance
+   *
+   * @param {Object} options router config options
+   * @param {Object} options.app Restify app instance
+   * @param {String} options.controllersPath path to controllers directory
+   * @param {Object} options.restify optios to pass to built in restify app
+   * @param {Function(router)} callback router instance for extending resources
+   */
   static map(options, callback){
     let router = new Router(options);
     callback.call(router);
