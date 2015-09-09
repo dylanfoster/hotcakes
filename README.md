@@ -76,8 +76,8 @@ export default {
     });
   },
   findById: function (req, res, next) {
-    // the default paramKey is "<modelname>_id"
-    db.findById(req.params.user_id).then(function (user) {
+    // the default paramKey is "id"
+    db.findById(req.params.id).then(function (user) {
       res.send(200, user);
     });
   },
@@ -108,9 +108,9 @@ Router.map(function () {
   this.resource("users", { path: "/people" });
 
 
-  // define a paramKey or use the default "<modelname>_id"
+  // define a paramKey or use the default "id"
 
-  this.resource("users", { paramKey: "person_id" });
+  this.resource("users", { paramKey: "user_id" });
 });
 
 export default hotcake;
@@ -125,6 +125,35 @@ GET /users/:id    -> UserController.findById
 PUT /users/:id    -> UserController.put
 POST /users       -> UserController.post
 DELETE /users/:id -> UserController.delete
+```
+
+#### `Hotcakes(options)`
+
+Hotcake constructor
+
+**options**
+
+ - `app`: restify app instance (optional)
+ - `controllersPath`: path to controllers directory (optional) **Default**: `./controllers`
+ - `port`: port for app to listen on. **Default**: `3800`
+ - `restify`: options to pass to built in restify app
+
+#### `boot()`
+
+initializes app and starts listening.
+
+#### `Router(options)`
+
+Builds routes and maps them to controllers. Typically accessed through `hotcakes.Router`. `options` are the same as `Hotcakes`
+
+#### `map(callback)`
+
+Maps resources to a set of routes.
+
+```javascript
+Router.map(function () {
+  this.resource("users");
+});
 ```
 
 ## Contributing
