@@ -2,6 +2,7 @@
 
 import path from "path";
 
+import { expect } from "chai";
 import supertest from "supertest";
 
 import Hotcakes from "../src/stack";
@@ -14,6 +15,12 @@ describe("Hotcakes", function () {
       controllersPath: path.resolve(__dirname, "fixtures/controllers"),
       port: 3801
     });
+  });
+
+  it("accurately sets default 'controllersPath'", function () {
+    let hotcake = new Hotcakes();
+    let expectedPath = path.resolve(__dirname, "controllers");
+    expect(hotcake.controllersPath).to.eql(expectedPath);
   });
 
   describe("boot", function () {

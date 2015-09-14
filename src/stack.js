@@ -24,7 +24,7 @@ class Stack {
    */
   constructor(options = {}) {
     this.app = options.app || restify.createServer(options.restify);
-    this.controllersPath = options.controllersPath || path.resolve("controllers");
+    this.controllersPath = options.controllersPath || path.resolve(path.dirname(module.parent.filename), "controllers");
     let self = this;
     Router.map = function (callback) {
       let router = new Router({
