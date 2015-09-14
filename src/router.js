@@ -72,9 +72,14 @@ class Router {
    * @param {Function(req, res, next)} action controller action
    */
   _bindRoute(route, method, action) {
+    action = action || this._methodNotAllowedError;
     let handlers = [];
     handlers.push(action);
     this.app[method](route, handlers);
+  }
+
+  _methodNotAllowedError(req, res, next) {
+    return next(new restify.MethodNotAllowedError);
   }
 
   /**

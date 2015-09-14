@@ -20,8 +20,5 @@ export default {
   findById: function (req, res, next) {
     let body = db.find(req.params.bar_id);
     res.send(200, body);
-  },
-  put: function () {},
-  post: function () {},
-  delete: function () {}
+  }
 };

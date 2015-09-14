@@ -11,7 +11,8 @@ describe("Hotcakes", function () {
 
   beforeEach(function () {
     hotcake = new Hotcakes({
-      controllersPath: path.resolve(__dirname, "fixtures/controllers")
+      controllersPath: path.resolve(__dirname, "fixtures/controllers"),
+      port: 3801
     });
   });
 
@@ -23,8 +24,11 @@ describe("Hotcakes", function () {
 
       client = supertest(hotcake.boot());
       client.get("/users")
-        .expect(200, [{ id: 1 }])
-        .end(done);
+        .end(function (err, res) {
+          if (err) { return done(err); }
+
+          done();
+        });
     });
   });
 });

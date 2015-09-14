@@ -92,6 +92,14 @@ describe("Router", function () {
         .expect(200, { id: 1 })
         .end(done);
     });
+
+    it("returns a 405 if a controller action is not defined", function (done) {
+      router.resource("foo");
+
+      client.put("/foo")
+        .expect(405)
+        .end(done);
+    });
   });
 
   describe("map", function () {
