@@ -100,6 +100,14 @@ describe("Router", function () {
         .expect(405)
         .end(done);
     });
+
+    it("inflects resources", function (done) {
+      router.resource("people");
+
+      client.get("/people")
+        .expect(200, { message: "person not people" })
+        .end(done);
+    });
   });
 
   describe("map", function () {
