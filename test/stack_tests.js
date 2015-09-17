@@ -23,6 +23,29 @@ describe("Hotcakes", function () {
     expect(hotcake.controllersPath).to.eql(expectedPath);
   });
 
+  describe("plugins", function () {
+    it("allows for custom plugins", function (done) {
+      let plugin = function (req, res, next) {
+        res.send(400, { message: "plugin error" }).end();
+      };
+
+      let hotcake = new Hotcakes({
+        controllersPath: path.resolve(__dirname, "fixtures/controllers"),
+        plugins: [plugin]
+      });
+
+      hotcake.Router.map(function () {
+        this.resource("foo");
+      });
+
+      client = supertest(hotcake.boot());
+
+      client.get("/foo")
+        .expect(400, { message: "plugin error" })
+        .end(done);
+    });
+  });
+
   describe("boot", function () {
     it("bootraps and routes specified requests", function (done) {
       hotcake.Router.map(function () {

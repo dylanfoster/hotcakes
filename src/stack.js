@@ -36,6 +36,8 @@ class Stack {
     };
     this.options = options;
     this.Router = Router;
+
+    this._initializePlugins(options.plugins);
   }
 
   /**
@@ -46,6 +48,14 @@ class Stack {
       this.app.use(plugin);
     });
     return this.app.listen(this.options.port || 3800);
+  }
+
+  _initializePlugins(plugins) {
+    if (plugins) {
+      plugins.forEach(plugin => {
+        this.app.use(plugin);
+      });
+    }
   }
 }
 
