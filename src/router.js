@@ -6,6 +6,7 @@ import path from "path";
 
 import inflect from "inflection";
 
+
 class Router {
   /**
    * @constructor
@@ -18,8 +19,18 @@ class Router {
   constructor(options = {}) {
     Assert(options.controllersPath, "Missing required 'controllersPath' property");
     Assert(options.app, "Missing required app instance");
+    let controllers = {};
+
     this.controllersPath = options.controllersPath;
     this.app = options.app;
+
+    fs.readdirSync(this.controllersPath)
+      .forEach(file => {
+        let name = file.split(path.extname(file))[0];
+        controllers[name] = require(`${this.controllersPath}/${file}`);
+      });
+
+    this.controllers = controllers;
   }
 
   /**
@@ -31,16 +42,8 @@ class Router {
    * @param {String} options.paramKey override default paramKey (id)
    */
   resource(name, options = {}) {
-    let controllers = {};
-
-    fs.readdirSync(this.controllersPath)
-      .forEach(file => {
-        let name = file.split(path.extname(file))[0];
-        controllers[name] = require(`${this.controllersPath}/${file}`);
-      });
-
     let controllerName = `${inflect.capitalize(inflect.singularize(name))}Controller`;
-    let controller = controllers[controllerName];
+    let controller = this.controllers[controllerName];
     this._bindRoutes(name, controller, options);
   }
 
