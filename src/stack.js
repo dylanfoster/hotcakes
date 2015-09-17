@@ -50,12 +50,18 @@ class Stack {
     return this.app.listen(this.options.port || 3800);
   }
 
+  /**
+   * _initializePlugins load middlewares provided by user
+   *
+   * @param {Array} plugins list of middlewares to use
+   */
   _initializePlugins(plugins) {
     if (plugins) {
       plugins.forEach(plugin => {
         this.app.use(plugin);
       });
     }
+    return;
   }
 }
 
