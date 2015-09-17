@@ -1,6 +1,6 @@
 {
   "name": "hotcakes",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "RESTful api framework built on restify",
   "main": "index.js",
   "repository": "dylanfoster/hotcakes",
